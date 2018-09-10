@@ -5,7 +5,7 @@
   -w is used to wookiee-fy the response, and is always the superior option
 */
 
-const request = require ('request');
+const request = require('request');
 
 var wookiee = ""
 var url = 'https://swapi.co/api/planets/1/'
@@ -16,19 +16,21 @@ if (process.argv[2] == "-w") {
 }
 
 // callback
-request (url, { json: true }, (err, res, body) => {
+function handleGet (err, res, body) {
   if (err) {
-    return console.log (err);
+    return console.log(err);
   }
 
   if (wookiee) {
-    console.log (body);
+    console.log(body);
   }
   else {
-    console.log (body.name);
-    console.log (body.terrain);
-    console.log (body.residents);
+    console.log(body.name);
+    console.log(body.terrain);
+    console.log(body.residents);
   }
-});
+}
+
+request(url, { json: true }, handleGet);
 
 // console.log('we done wit dis');
